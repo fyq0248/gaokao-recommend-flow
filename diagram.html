@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tapestry架构流程图</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
+    <style>
+        :root {
+            --primary-color: #2e7d32;
+            --secondary-color: #1565c0;
+        }
+        .tapestry-node rect {
+            fill: var(--primary-color);
+            stroke: #1b5e20;
+            rx: 8px;
+            ry: 8px;
+        }
+        .tapestry-edge path {
+            stroke: var(--secondary-color);
+            stroke-width: 3px;
+        }
+        .tapestry-cluster rect {
+            fill: #e8f5e9;
+            stroke: #81c784;
+        }
+    </style>
+</head>
+<body>
+    <div class="mermaid">
+        flowchart TD
+            subgraph 数据源层["数据源层 (绿色)"]
+                A[考生成绩库] -->|HTTP API| B[用户画像服务]
+                C[院校信息库] -->|数据同步| D[特征工程模块]
+            end
+            
+            subgraph 算法层["算法层 (蓝色)"]
+                B --> E[特征向量生成]
+                D --> E
+                E --> F[相似度计算]
+                F --> G[Top-K筛选]
+                G --> H[概率预测模型]
+            end
+            
+            subgraph 服务层["服务层 (紫色)"]
+                H --> I[推荐排序引擎]
+                I --> J[API网关]
+            end
+            
+            subgraph 展示层["展示层 (橙色)"]
+                J --> K[Web前端]
+                J --> L[移动端]
+                J --> M[小程序]
+            end
+            
+            classDef tapestry-node fill:#4CAF50,stroke:#388E3C
+            classDef tapestry-cluster fill:#E8F5E9,stroke:#81C784
+            class A,B,C,D tapestry-node
+            class data_source,algorithm,service,display tapestry-cluster
+    </div>
+</body>
+</html>
