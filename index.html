@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>高考志愿推荐算法流程图</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
+    <style>
+        body { 
+            margin: 2rem; 
+            background: #f0f2f5;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: #1a237e;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .mermaid {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .node rect {
+            fill: #2196f3;
+            stroke: #1565c0;
+            rx: 8px;
+            ry: 8px;
+        }
+        .edgePath path {
+            stroke: #666;
+            stroke-width: 2px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>高考志愿推荐系统核心算法流程图</h1>
+        <div class="mermaid">
+            flowchart TD
+                subgraph 数据输入
+                    A[考生分数] --> B[历年录取数据]
+                    A --> C[兴趣标签]
+                    B --> D[院校特征库]
+                end
+                subgraph 算法处理
+                    D --> E[协同过滤计算]
+                    C --> E
+                    E --> F[相似用户Top10]
+                    F --> G[生成候选院校集]
+                end
+                subgraph 结果输出
+                    G --> H[按录取概率排序]
+                    H --> I[可视化推荐列表]
+                end
+        </div>
+    </div>
+</body>
+</html>
